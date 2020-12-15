@@ -22,35 +22,46 @@ var main = document.getElementById("main");
 var mainText = document.getElementById("mainText");
 
 //global variables
+var interval;
 var timeRemaining;
-questionNumber = 0;
-whatQuestion = questionNumber + 1;
+var questionNumber = 0;
 
 //main function
 function init() {
   startTimer();
   clearingElements();
-  formingElements();
 }
 
 // function to start timer and deal with manipulation of time.
 function startTimer() {
-  var timeRemaining = 60;
-  var interval = setInterval(function (event) {
+  timeRemaining = 90;
+  interval = setInterval(function (event) {
     timeRemaining--;
     timer.textContent = timeRemaining;
+    if (timeRemaining === 0) {
+      clearInterval(interval);
+      //endGame
+    }
   }, 1000);
+}
+
+//clears all the html at the id=main line. KABLOOEY. then runs the forming elements function.
+function clearingElements() {
+  main.innerHTML = "";
+  formingElements();
 }
 
 // forming elements to show the questions
 function formingElements() {
+  console.log("hi");
   // making ul element to append to main
   var sectionQuestion = document.createElement("ul");
   sectionQuestion.setAttribute("id", "secQuestion");
   sectionQuestion.textContent = quizQuestions[questionNumber].question;
+  console.log(questionNumber + "question number");
+  console.log(whatQuestion + "whatquestion");
+  var whatQuestion = questionNumber + 1;
   header.textContent = "Question number " + whatQuestion + ".";
-  // var textNode = document.createTextNode("");
-  // taco.prepend(textNode);
 
   for (let i = 0; i < 4; i++) {
     // making li elements to append to ul
@@ -73,22 +84,12 @@ function formingElements() {
   }
   // console.dir(sectionQuestion)
   main.appendChild(sectionQuestion);
-
-  // displayQuestions(sectionQuestion, liEle);
 }
-start.addEventListener("click", init);
-
-document.addEventListener("click", checkAnswer);
-//   if (event.target.class === "answer") {
-//     console.log("click");
-//   }
-// });
 
 function checkAnswer(event) {
-  event.target.nod;
-  if (event.target.id("answer0")) {
+  if (event.target.matches("button.answer")) {
     console.log(event.target.textContent);
-    // console.log(quizQuestions[questionNumber].answer[quizQuestions[questionNumber].correct]);
+    console.log(quizQuestions[questionNumber].answer[quizQuestions[questionNumber].correct]);
     if (
       event.target.textContent ===
       quizQuestions[questionNumber].answer[
@@ -102,30 +103,22 @@ function checkAnswer(event) {
       timeRemaining = timeRemaining - 10;
       console.log("not correct");
     }
-    if (questionNumber >= 3) {
+    if (questionNumber > 3) { // to do not working
+      console.log("time to end game");
+      //clear interval stuff
       //end game?
     } else {
       questionNumber++;
-      clearingElements;
+      console.log(questionNumber);
+      clearingElements();
     }
   }
 }
 
-function clearingElements() {
-  if (questionNumber === 0) {
-    main.innerHTML = "";
-  } else {
-    console.log(questionNumber);
-    main.innerHTML = "";
-    formingElements;
-  }
-}
+start.addEventListener("click", init);
+main.addEventListener("click", checkAnswer);
 
-// function displayQuestions(taco, liEle) {
-//   // console.dir(liEle);
+// highscores = JSON.parse(localStorage.getItem("highscores") || [];
 
-//   for (let i = 1; i < 5; i++) {
-//     var inputButton = document.getElementById("answer"+(i-1)+"");
+// localStorage.setItem("highscores", JSON.stringify(highscores))
 
-//   }
-// }
