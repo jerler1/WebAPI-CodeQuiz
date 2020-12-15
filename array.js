@@ -18,7 +18,7 @@ var quest3 = {
 var quest4 = {
   question: "String values must be enclosed within _____ when being assigned to variables.",
   answer: ["commas", "curly brackets", "quotes", "parentheses"],
-  correct: 2
+  correct: 1
 };
 var quest5 = {
   question: "A very useful tool used during development and debugging for printing content to the debugger is:",

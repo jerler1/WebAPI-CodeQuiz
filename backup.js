@@ -44,15 +44,13 @@ function startTimer() {
 
 // forming elements to show the questions
 function formingElements() {
+
   // making ul element to append to main
   var sectionQuestion = document.createElement("ul");
   sectionQuestion.setAttribute("id", "secQuestion");
-  sectionQuestion.textContent = quizQuestions[questionNumber].question;
-  header.textContent = "Question number " + whatQuestion + ".";
-  // var textNode = document.createTextNode("");
-  // taco.prepend(textNode);
 
   for (let i = 0; i < 4; i++) {
+
     // making li elements to append to ul
     var liEle = document.createElement("li");
     liEle.style = "list-style: none";
@@ -61,7 +59,6 @@ function formingElements() {
 
     //making button elements to append to li
     var answerElement = document.createElement("button");
-    answerElement.textContent = quizQuestions[questionNumber].answer[i];
     answerElement.setAttribute("id", "answer" + i);
     answerElement.setAttribute("data-index", i);
     answerElement.setAttribute(
@@ -74,9 +71,10 @@ function formingElements() {
   // console.dir(sectionQuestion)
   main.appendChild(sectionQuestion);
 
-  // displayQuestions(sectionQuestion, liEle);
+  displayQuestions(sectionQuestion, liEle);
 }
 start.addEventListener("click", init);
+
 
 document.addEventListener("click", checkAnswer);
 //   if (event.target.class === "answer") {
@@ -85,16 +83,10 @@ document.addEventListener("click", checkAnswer);
 // });
 
 function checkAnswer(event) {
-  event.target.nod;
-  if (event.target.id("answer0")) {
+  if (event.target.matches("button")) {
     console.log(event.target.textContent);
-    // console.log(quizQuestions[questionNumber].answer[quizQuestions[questionNumber].correct]);
-    if (
-      event.target.textContent ===
-      quizQuestions[questionNumber].answer[
-        quizQuestions[questionNumber].correct
-      ]
-    ) {
+    console.log(quizQuestions[questionNumber].answer[quizQuestions[questionNumber].correct]);
+    if(event.target.textContent === quizQuestions[questionNumber].answer[quizQuestions[questionNumber].correct]) {
       //TO DO make a correct section
       console.log("correct");
     } else {
@@ -102,30 +94,29 @@ function checkAnswer(event) {
       timeRemaining = timeRemaining - 10;
       console.log("not correct");
     }
-    if (questionNumber >= 3) {
-      //end game?
-    } else {
-      questionNumber++;
-      clearingElements;
-    }
-  }
-}
+    questionNumber++;
+    clearingElements;
+}}
+
 
 function clearingElements() {
   if (questionNumber === 0) {
-    main.innerHTML = "";
+  main.innerHTML = "";
   } else {
-    console.log(questionNumber);
     main.innerHTML = "";
-    formingElements;
+    formingElements; 
   }
 }
 
-// function displayQuestions(taco, liEle) {
-//   // console.dir(liEle);
+function displayQuestions(taco, liEle) {
+  // console.dir(liEle);
+  var textNode = document.createTextNode("");
+  textNode.textContent = quizQuestions[questionNumber].question; 
+  taco.prepend(textNode);
+  header.textContent = "Question number " + whatQuestion + ".";
 
-//   for (let i = 1; i < 5; i++) {
-//     var inputButton = document.getElementById("answer"+(i-1)+"");
-
-//   }
-// }
+  for (let i = 1; i < 5; i++) {
+    var inputButton = document.getElementById("answer"+(i-1)+"");
+    inputButton.textContent = quizQuestions[questionNumber].answer[i-1];
+  }
+}
