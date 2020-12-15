@@ -35,57 +35,60 @@ function init() {
 
 // function to start timer and deal with manipulation of time.
 function startTimer() {
-    var timeRemaining = 60;
-    var interval = setInterval(function(event){
-        timeRemaining--;
-        timer.textContent = timeRemaining;
-    }, 1000);
+  var timeRemaining = 60;
+  var interval = setInterval(function (event) {
+    timeRemaining--;
+    timer.textContent = timeRemaining;
+  }, 1000);
 }
 
 function formingElements() {
   var sectionQuestion = document.createElement("ul");
   sectionQuestion.setAttribute("id", "secQuestion");
-  var sec = document.getElementById("secQuestion");
-  var classEle = [];
+
   for (let i = 0; i < 4; i++) {
     var liEle = document.createElement("li");
-    liEle.setAttribute("id","liElement");
+    liEle.setAttribute("id", "liElement" + i + "");
+    sectionQuestion.appendChild(liEle);
     var answerElement = document.createElement("button");
-    answerElement.setAttribute("id", "answer");
+    answerElement.setAttribute("id", "answer" + i);
     answerElement.setAttribute("data-index", i);
     answerElement.setAttribute(
       "class",
       "answer" + i + " btn btn-secondary mx-1 my-1 px-2 py-2"
-      );
-      console.log(answerElement);
-      sectionQuestion.appendChild(answerElement);
-    }
-    class.push(answerElement.getAttribute('class'));
-    main.appendChild(sectionQuestion);
+    );
+    // console.log(answerElement);
+    liEle.appendChild(answerElement);
+  }
+  // console.dir(sectionQuestion)
+  main.appendChild(sectionQuestion);
 
-
-    displayQuestions(classEle);
+  displayQuestions(sectionQuestion, liEle);
 }
 start.addEventListener("click", init);
 
+
 document.addEventListener("click", function (event) {
-    if (event.target.id === "answer") {
-      console.log("click");
-    }
-  });
+  if (event.target.class === "answer") {
+    console.log("click");
+  }
+});
 
 
-  function clearingElements() {
-    start.remove();
-    mainText.remove();
-  }
+function clearingElements() {
+  start.remove();
+  mainText.remove();
+}
+
+function displayQuestions(taco, liEle) {
+  // console.dir(liEle);
+  var textNode = document.createTextNode("");
+  textNode.textContent = quizQuestions[questionNumber].question; 
+  taco.prepend(textNode);
+  header.textContent = "Question number " + whatQuestion + ".";
   
-  function displayQuestions(array) {
-    sectionQuestion.textContent = quizQuestions[questionNumber].question;
-    header.textContent = "Question number " + whatQuestion + ".";
-    for (let i = 0; i < 4; i++) {
-      
-      selectAnswer.textContent = quizQuestions[questionNumber].answer[i];
-    }
+  for (let i = 1; i < 5; i++) {
+    var inputButton = document.getElementById("answer"+(i-1)+"");
+    inputButton.textContent = quizQuestions[questionNumber].answer[i-1];
   }
-  
+}
