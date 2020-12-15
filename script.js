@@ -20,6 +20,7 @@ var start = document.getElementById("start");
 var header = document.getElementById("header");
 var main = document.getElementById("main");
 var mainText = document.getElementById("mainText");
+var hrElement = document.createElement("hr");
 
 //global variables
 var interval;
@@ -40,7 +41,7 @@ function startTimer() {
     timer.textContent = timeRemaining;
     if (timeRemaining === 0) {
       clearInterval(interval);
-      //endGame
+      endgame();
     }
   }, 1000);
 }
@@ -53,13 +54,10 @@ function clearingElements() {
 
 // forming elements to show the questions
 function formingElements() {
-  console.log("hi");
   // making ul element to append to main
   var sectionQuestion = document.createElement("ul");
   sectionQuestion.setAttribute("id", "secQuestion");
   sectionQuestion.textContent = quizQuestions[questionNumber].question;
-  console.log(questionNumber + "question number");
-  console.log(whatQuestion + "whatquestion");
   var whatQuestion = questionNumber + 1;
   header.textContent = "Question number " + whatQuestion + ".";
 
@@ -86,39 +84,73 @@ function formingElements() {
   main.appendChild(sectionQuestion);
 }
 
+//checking the button click value to the answer in the quizQuestions answer array
 function checkAnswer(event) {
+  event.preventDefault();
   if (event.target.matches("button.answer")) {
     console.log(event.target.textContent);
-    console.log(quizQuestions[questionNumber].answer[quizQuestions[questionNumber].correct]);
+    console.log(
+      quizQuestions[questionNumber].answer[
+        quizQuestions[questionNumber].correct
+      ]
+    );
     if (
       event.target.textContent ===
       quizQuestions[questionNumber].answer[
         quizQuestions[questionNumber].correct
       ]
-    ) {
+    ) { 
+            // if answer is correct do nothing
       //TO DO make a correct section
       console.log("correct");
-    } else {
+    } else {  // if answer is incorrect subtract time
       //TO DO make a incorrect.
       timeRemaining = timeRemaining - 10;
       console.log("not correct");
     }
-    if (questionNumber > 3) { // to do not working
-      console.log("time to end game");
-      //clear interval stuff
-      //end game?
+    // if we have reached the end of the game run endgame else iterate question numbers.
+    if (quizQuestions[questionNumber + 1] === undefined) {
+      console.log(quizQuestions.length);
+      endgame();
     } else {
       questionNumber++;
-      console.log(questionNumber);
       clearingElements();
     }
   }
+  if (event.target.matches("button.congrats")) {
+    // array push to?
+    // force browser to highscores?
+  }
+}
+//how the game ends and shows your score and input highscore.
+function endgame() {
+
+  var score = timeRemaining;
+  clearInterval(interval);
+  header.textContent = "Congratulation your score is : " + score + ".";
+  main.innerHTML="";
+  // main.appendChild(hrElement);
+
+  var formEle = document.createElement("form");
+  main.appendChild(formEle);
+
+  var inputBox = document.createElement("input");
+  inputBox.setAttribute("class", "form-control form-control-log");  
+  inputBox.setAttribute("type", "text");  
+  inputBox.setAttribute("placeholder", "Enter your initials.");  
+  inputBox.setAttribute("id", "intialsInput");
+  main.firstChild.appendChild(inputBox);
+  // main.firstChild.appendChild(hrElement);  
+
+  var victoryBtn = document.createElement("button");
+  victoryBtn.setAttribute("type", "submit");
+  victoryBtn.setAttribute("class", "btn btn-primary congrats");
+  victoryBtn.textContent = "Submit";
+  main.firstChild.appendChild(victoryBtn);
+
 }
 
 start.addEventListener("click", init);
 main.addEventListener("click", checkAnswer);
-
-// highscores = JSON.parse(localStorage.getItem("highscores") || [];
-
-// localStorage.setItem("highscores", JSON.stringify(highscores))
+// main.addEventListener("submit", )
 
