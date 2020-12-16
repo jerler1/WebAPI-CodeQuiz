@@ -23,6 +23,7 @@ var mainText = document.getElementById("mainText");
 var hrElement = document.createElement("hr");
 
 //global variables
+var hiScores;
 var interval;
 var timeRemaining;
 var questionNumber = 0;
@@ -138,6 +139,8 @@ function endgame() {
   victoryBtn.setAttribute("type", "submit");
   victoryBtn.setAttribute("class", "btn btn-primary congrats");
   victoryBtn.textContent = "Submit";
+
+
   // on click of button i just made
   victoryBtn.addEventListener("click", function() {
     // grab the inits
@@ -149,8 +152,8 @@ function endgame() {
       score: scoreWinner
     }
 
-    var hiScores = localStorage.getItem("highscores");
-    console.log(hiScores);
+    hiScores = localStorage.getItem("highscores");
+
     // if hiScores is null
     // -- set hiScore to an empty array
     // else
@@ -164,18 +167,38 @@ function endgame() {
     // add my new hi score to it
     // stringify his scoores
     // put it back into the localstorage
-    console.log(hiScores);
-    console.log(highscoresWinners);
+
     hiScores.push(highscoresWinners);
-    console.log(highscoresWinners);
-    localStorage.setItem("highscoresWinners", JSON.stringify(hiScores));
+
+    //putting hiScores back into local storage
+    localStorage.setItem("highscores", JSON.stringify(hiScores));
   })
 
   main.firstChild.appendChild(victoryBtn);
 
 
 }
+if (document.title === "Code Quiz") {
 start.addEventListener("click", init);
 main.addEventListener("click", checkAnswer);
+}
 
 
+
+
+
+// excuse me for my mess
+// 
+if (document.title === "Highscores"){
+  var hiScores = JSON.parse(localStorage.getItem("highscores"));
+  var highDiv = document.getElementById("highDiv");
+  for (let i = 0; i < hiScores.length; i++) {
+    //creating divs to add to append high scores to and  initials
+    var victoryDiv = document.createElement("p");
+    victoryDiv.textContent = "Initials: " + hiScores[i].initials + " with a score of: " + hiScores[i].score + ".";
+    // var victoryDivText = document.createTextNode("Initials: " + highscoresWinners[i].initials + " with a score of: " + highscoresWinners[i].score + ".");
+    // victoryDiv.appendChild(victoryDivText);
+    highDiv.appendChild(victoryDiv);
+  }
+  
+  }
