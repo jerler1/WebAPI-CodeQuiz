@@ -32,9 +32,9 @@ The trials in this project were many.  The scope of this project was much higher
 #### **Usage**
 ---
 The usage of the website is fairly simple.  You start with a basic screen.
-![picture of start screen](./Web-Quiz-Screen.png)
+![picture of start screen](./assets/Web-Quiz-Screen.png)
 Click the start button and you should see a question and you select the answer you think is correct.  From there you continue till finish and input your initials and your score will be saved.
-![picture of questions](./Web-Quiz-Questions.png)
+![picture of questions](./assets/Web-Quiz-Questions.png)
 The application is deployed [here](https://jerler1.github.io/WebAPI-CodeQuiz/).
 
 #### **Credits**
