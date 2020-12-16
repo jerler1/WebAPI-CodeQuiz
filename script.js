@@ -88,69 +88,94 @@ function formingElements() {
 function checkAnswer(event) {
   event.preventDefault();
   if (event.target.matches("button.answer")) {
-    console.log(event.target.textContent);
-    console.log(
-      quizQuestions[questionNumber].answer[
-        quizQuestions[questionNumber].correct
-      ]
-    );
     if (
       event.target.textContent ===
       quizQuestions[questionNumber].answer[
         quizQuestions[questionNumber].correct
       ]
     ) { 
-            // if answer is correct do nothing
+      // if answer is correct do nothing
       //TO DO make a correct section
-      console.log("correct");
+      // console.log("correct");
     } else {  // if answer is incorrect subtract time
       //TO DO make a incorrect.
       timeRemaining = timeRemaining - 10;
-      console.log("not correct");
+      // console.log("not correct");
     }
     // if we have reached the end of the game run endgame else iterate question numbers.
     if (quizQuestions[questionNumber + 1] === undefined) {
-      console.log(quizQuestions.length);
+      // console.log(quizQuestions.length);
       endgame();
     } else {
       questionNumber++;
       clearingElements();
     }
   }
-  if (event.target.matches("button.congrats")) {
-    // array push to?
-    // force browser to highscores?
-  }
 }
 //how the game ends and shows your score and input highscore.
 function endgame() {
 
-  var score = timeRemaining;
+  // setting score and clearing interval and changing text of header
+  var scoreWinner = timeRemaining;
   clearInterval(interval);
-  header.textContent = "Congratulation your score is : " + score + ".";
+  header.textContent = "Congratulation your score is : " + scoreWinner + ".";
   main.innerHTML="";
-  // main.appendChild(hrElement);
 
+  //making and appending form element
   var formEle = document.createElement("form");
   main.appendChild(formEle);
 
+  //making and appending input
   var inputBox = document.createElement("input");
   inputBox.setAttribute("class", "form-control form-control-log");  
   inputBox.setAttribute("type", "text");  
   inputBox.setAttribute("placeholder", "Enter your initials.");  
   inputBox.setAttribute("id", "intialsInput");
   main.firstChild.appendChild(inputBox);
-  // main.firstChild.appendChild(hrElement);  
 
+  //making and appending button
   var victoryBtn = document.createElement("button");
   victoryBtn.setAttribute("type", "submit");
   victoryBtn.setAttribute("class", "btn btn-primary congrats");
   victoryBtn.textContent = "Submit";
+  // on click of button i just made
+  victoryBtn.addEventListener("click", function() {
+    // grab the inits
+    var initialsWinner = inputBox.value;
+    // grab the score
+    // make it an inital object
+    var highscoresWinners = {
+      initials: initialsWinner,
+      score: scoreWinner
+    }
+
+    var hiScores = localStorage.getItem("highscores");
+    console.log(hiScores);
+    // if hiScores is null
+    // -- set hiScore to an empty array
+    // else
+    // -- parse it into js. and then it looks like this 
+    if (hiScores === null) {
+      hiScores = [];
+    } else {
+      hiScores = JSON.parse(hiScores);
+    }
+    // now i have hiscores. 
+    // add my new hi score to it
+    // stringify his scoores
+    // put it back into the localstorage
+    console.log(hiScores);
+    console.log(highscoresWinners);
+    hiScores.push(highscoresWinners);
+    console.log(highscoresWinners);
+    localStorage.setItem("highscoresWinners", JSON.stringify(hiScores));
+  })
+
   main.firstChild.appendChild(victoryBtn);
 
-}
 
+}
 start.addEventListener("click", init);
 main.addEventListener("click", checkAnswer);
-// main.addEventListener("submit", )
+
 

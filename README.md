@@ -1,91 +1,68 @@
-# 04 Web APIs: Code Quiz
+## **Web API Quiz**
+---
 
-## Your Task
-
-As you proceed in your journey to becoming a full-stack web developer, it’s likely that you’ll be asked to complete a coding assessment, perhaps as part of an interview process. A typical coding assessment is a combination of multiple-choice questions and interactive coding challenges. 
-
-To help you become familiar with these tests and give you a chance to apply the skills from this module, this week’s homework invites you to build a timed coding quiz with multiple-choice questions. This app will run in the browser, and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. This week’s coursework will teach you all the skills you need to succeed in this assignment.
-
-
-## User Story
-
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
+#### **Table of Contents**
+---
+1. [Installalation](#installation)
+1. [Trials](#trials)
+1. [Usage](#usage)
+1. [Credits](#credits)
+1. [License](#license)
 
 
-## Acceptance Criteria
+#### **Installation**
+---
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score
-```
+1. Make the html page containing the start button and instructions how to play.
+1. Make the question objects with correct and incorrect answers.  Specify which one is correct.
+1. Make a timer to count down as the quiz is being taken, as this is the score.
+1. Make a on click event for the start button to start the init().
+1. Remove the old content.
+1. Dynamically build (using DOM) the structures to make new questions appear with selections.
+1. Make an on click event to determine if a selection was pick, and if the answer is correct or incorrect.
+1. Make the question number iterate and remove the old html with DOM and rebuild with a new question.
+1. Display the congratulation screen, displaying the score, and allow them to enter their initials.
+1. Store initials and score into local storage and use them to display a html page for the high scores.
 
+#### **Trials**
+---
 
-## Mock-Up
+The trials in this project were many.  The scope of this project was much higher than I anticipated, and many many things went wrong. My first major problem was scope of my functions, I kept trying to call things that were in other functions.  I ended up having to re-write a few functions to make them all work, but I learned a valuable lesson.  DOM was a struggle for me at first, but now I think I have it quite under control and it shouldn't hopefully be an issue in the future.  The last trial I had was event.target and how this function, this threw me through a loop.
 
-The following animation demonstrates the application functionality:
+#### **Usage**
+---
+The usage of the website is fairly simple.  You start with a basic screen.
+![picture of start screen](./Web-Quiz-Screen.png)
+Click the start button and you should see a question and you select the answer you think is correct.  From there you continue till finish and input your initials and your score will be saved.
+![picture of questions](./Web-Quiz-Questions.png)
 
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
+#### **Credits**
+---
+Thanks to my tutor Bryon Brown for teaching my local storage.
+Thanks to my TA Peter for helping with my timer.
+Thanks to my classmates Molly, Pete, and any others who gave me advice.
 
+#### **License**
+---
 
-## Grading Requirements
+Copyright (c) 2005-2020 David Heinemeier Hansson
 
-This homework is graded based on the following criteria: 
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
 
-### Technical Acceptance Criteria: 40%
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
 
-* Satisfies all of the above acceptance criteria.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the homework instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality README file with description, screenshot, and link to deployed application.
-
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
-- - -
-© 2020 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
